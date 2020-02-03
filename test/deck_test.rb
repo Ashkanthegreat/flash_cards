@@ -1,3 +1,20 @@
+require 'minitest/autorun'
+require 'minitest/pride'
+require './lib/deck'
+require '.lib/turn'
+require '.lib/card'
+require 'pry'
+
+class DeckTest < Minitest::Test
+
+    def test_if_card_1_exists
+      card_1 = Card.new('What is the capital of Alaska?', 'Juneau', :Geography)
+      assert_instance_of Card, card_1
+    end
+end
+
+
+
 # pry(main)> require './lib/card'
 # #=> true
 #
