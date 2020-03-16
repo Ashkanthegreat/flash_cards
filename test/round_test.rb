@@ -37,7 +37,32 @@ class RoundTest < Minitest::Test
     assert_equal :Geography, new_turn.card.category
   end
 
-  
+  def test_turn_class_attributes
+    new_turn = @round.take_turn("Juneau")
+    assert_equal [new_turn], @round.turns
+    assert_equal 1, @round.number_correct
+    assert_equal @card_2, @round.current_card
+  end
+
+  def test_count_turns
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
+    assert_equal 2, @round.turns.count
+  end
+
+  def test_can_detect_incorrect_answer
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
+    assert_equal "Incorrect", @round.turns.last.feedback
+    assert_equal 1, @round.number_correct
+  end
+
+  def test_number_correct_by_category
+    @round.take_turn("Juneau")
+    @round.take_turn("Venus")
+    assert_equal 1, @round.number_correct_by_category(:Geography)
+    assert_equal 0, @round.number_correct_by_category(:STEM)
+  end
 
 
 

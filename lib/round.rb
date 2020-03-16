@@ -1,5 +1,5 @@
 class Round
-  attr_reader :deck, :turns, :current_card
+  attr_reader :deck, :turns, :number_correct
 
   def initialize(deck)
     @deck = deck
@@ -17,6 +17,10 @@ class Round
     @turns << turn
     @deck.cards.shift()
     turn
+  end
+
+  def number_correct_by_category(category)
+     @turns.select { |turn| turn.correct? && turn.card.category == category}.count
   end
 
 end
